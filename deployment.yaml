@@ -38,7 +38,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  #namespace: gos
+  #namespace: gosw
   name: go-ingress
   annotations:
     allow.http: "false"
