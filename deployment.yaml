@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: thread-service
+spec:
+  selector:
+    app: thread
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8090
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-thread
+  labels:
+    app: thread
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thread
+  template:
+    metadata:
+      labels:
+        app: thread
+    spec:
+      imagePullSecrets:
+        - name: pipeline-docker-registry
+      containers:
+        - name: maven
+          image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+          ports:
+            - containerPort: 8080
