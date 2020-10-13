@@ -9,7 +9,7 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      targetPort: 8090
+      targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,3 +34,20 @@ spec:
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
           ports:
             - containerPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  #namespace: go
+  name: go-ingress
+  annotations:
+    allow.http: "false"
+spec:
+  rules:
+    - host: thread.ec2-54-81-31-0.compute-1.amazonaws.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: go-service
+              servicePort: 8080
