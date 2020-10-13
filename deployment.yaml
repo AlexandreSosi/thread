@@ -33,7 +33,7 @@ spec:
         - name: maven
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
           ports:
-            - containerPort: 8080
+            - containerPort: 8084
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
