@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-EXPOSE 8080
+EXPOSE 8090
 RUN mkdir app
 ADD target/gs-spring-boot-docker-0.1.0.jar /app/gs-spring-boot-docker-0.1.0.jar
 WORKDIR /app
